@@ -1351,8 +1351,15 @@ Entry.Playground = class Playground {
      * @param {!number} end
      */
     movePicture(start, end) {
+        const previousScrollTop =
+            this.pictureListView_?.querySelector('.rcs-inner-container')?.scrollTop;
         this.object.pictures.splice(end, 0, this.object.pictures.splice(start, 1)[0]);
         this.injectPicture();
+
+        const scrollContainer = this.pictureListView_?.querySelector('.rcs-inner-container');
+        if (scrollContainer && previousScrollTop !== undefined) {
+            scrollContainer.scrollTop = previousScrollTop;
+        }
     }
 
     /**
